@@ -11,7 +11,7 @@ options:
     gen_linking: dynamic
     generate_options: qt_gui
     hier_block_src_path: '.:'
-    id: rf_flowgraph_2
+    id: rf_tester
     max_nouts: '0'
     output_language: python
     placement: (0,0)
@@ -22,7 +22,7 @@ options:
     run_options: prompt
     sizing_mode: fixed
     thread_safe_setters: ''
-    title: Loopback Test 2
+    title: Loopback Test
     window_size: (1000,1000)
   states:
     bus_sink: false
@@ -34,75 +34,129 @@ options:
 
 blocks:
 - name: signal_src_freq
-  id: variable
+  id: variable_qtgui_range
   parameters:
     comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1000'
+    stop: '500000'
     value: '400000'
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [232, 124.0]
+    coordinate: [192, 156.0]
     rotation: 0
     state: true
 - name: signal_src_samp_rate
-  id: variable
+  id: variable_qtgui_range
   parameters:
     comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '1000'
+    step: '1000'
+    stop: '1000000'
     value: '1000000'
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [368, 124.0]
+    coordinate: [368, 156.0]
     rotation: 0
     state: true
 - name: uhd_bw
-  id: variable
+  id: variable_qtgui_range
   parameters:
     comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '1000'
+    step: '10000'
+    stop: '56000000'
     value: '1000000'
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [616, 44.0]
+    coordinate: [704, 12.0]
     rotation: 0
     state: true
 - name: uhd_center_freq
-  id: variable
+  id: variable_qtgui_range
   parameters:
     comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '70000000'
+    step: '1000000'
+    stop: '6000000000'
     value: '100000000'
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [232, 44.0]
+    coordinate: [192, 12.0]
     rotation: 0
     state: true
 - name: uhd_gain
-  id: variable
+  id: variable_qtgui_range
   parameters:
     comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0'
+    step: '1'
+    stop: '90'
     value: '1'
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [512, 44.0]
+    coordinate: [528, 12.0]
     rotation: 0
     state: true
 - name: uhd_sample_rate
-  id: variable
+  id: variable_qtgui_range
   parameters:
     comment: ''
+    gui_hint: ''
+    label: ''
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '32000'
+    step: '10000'
+    stop: '56000000'
     value: '500000'
+    widget: counter_slider
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [368, 44.0]
+    coordinate: [352, 12.0]
     rotation: 0
     state: true
 - name: analog_sig_source_x_0
@@ -128,24 +182,6 @@ blocks:
     coordinate: [64, 292.0]
     rotation: 0
     state: true
-- name: blocks_file_sink_0
-  id: blocks_file_sink
-  parameters:
-    affinity: ''
-    alias: ''
-    append: 'False'
-    comment: ''
-    file: rf_flowgraph_2.bin
-    type: complex
-    unbuffered: 'False'
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [448, 492.0]
-    rotation: 0
-    state: true
 - name: note_0
   id: note
   parameters:
@@ -159,17 +195,33 @@ blocks:
     coordinate: [864, 60.0]
     rotation: 0
     state: true
-- name: note_1
-  id: note
+- name: qtgui_sink_x_0
+  id: qtgui_sink_x
   parameters:
+    affinity: ''
     alias: ''
+    bw: uhd_bw
     comment: ''
-    note: There is a TCP Sink Block to potentially send stream over TCP.
+    fc: uhd_center_freq
+    fftsize: '1024'
+    gui_hint: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '""'
+    plotconst: 'True'
+    plotfreq: 'True'
+    plottime: 'True'
+    plotwaterfall: 'True'
+    rate: '10'
+    showports: 'False'
+    showrf: 'False'
+    type: complex
+    wintype: window.WIN_BLACKMAN_hARRIS
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [664, 492.0]
+    coordinate: [456, 484.0]
     rotation: 0
     state: true
 - name: uhd_usrp_sink_0
@@ -888,7 +940,7 @@ blocks:
 
 connections:
 - [analog_sig_source_x_0, '0', uhd_usrp_sink_0, '0']
-- [uhd_usrp_source_0, '0', blocks_file_sink_0, '0']
+- [uhd_usrp_source_0, '0', qtgui_sink_x_0, '0']
 
 metadata:
   file_format: 1

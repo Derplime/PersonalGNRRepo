@@ -71,7 +71,7 @@ class rf_tester(gr.top_block, Qt.QWidget):
         self.uhd_center_freq = uhd_center_freq = 100000000
         self.uhd_bw = uhd_bw = 1000000
         self.signal_src_samp_rate = signal_src_samp_rate = 1000000
-        self.signal_src_freq = signal_src_freq = 10000
+        self.signal_src_freq = signal_src_freq = 400000
 
         ##################################################
         # Blocks
@@ -92,7 +92,7 @@ class rf_tester(gr.top_block, Qt.QWidget):
         self._signal_src_samp_rate_range = Range(1000, 1000000, 1000, 1000000, 200)
         self._signal_src_samp_rate_win = RangeWidget(self._signal_src_samp_rate_range, self.set_signal_src_samp_rate, "'signal_src_samp_rate'", "counter_slider", float, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._signal_src_samp_rate_win)
-        self._signal_src_freq_range = Range(0, 500000, 1000, 10000, 200)
+        self._signal_src_freq_range = Range(0, 500000, 1000, 400000, 200)
         self._signal_src_freq_win = RangeWidget(self._signal_src_freq_range, self.set_signal_src_freq, "'signal_src_freq'", "counter_slider", float, QtCore.Qt.Horizontal)
         self.top_layout.addWidget(self._signal_src_freq_win)
         self.uhd_usrp_source_0 = uhd.usrp_source(

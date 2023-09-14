@@ -25,8 +25,6 @@ from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
 from gnuradio import uhd
 import time
-from gnuradio.qtgui import Range, RangeWidget
-from PyQt5 import QtCore
 
 
 
@@ -68,33 +66,15 @@ class rf_flowgraph_2(gr.top_block, Qt.QWidget):
         ##################################################
         self.uhd_sample_rate = uhd_sample_rate = 500000
         self.uhd_gain = uhd_gain = 1
-        self.uhd_center_freq = uhd_center_freq = 80000000
+        self.uhd_center_freq = uhd_center_freq = 100000000
         self.uhd_bw = uhd_bw = 1000000
         self.signal_src_samp_rate = signal_src_samp_rate = 1000000
-        self.signal_src_freq = signal_src_freq = 10000
+        self.signal_src_freq = signal_src_freq = 400000
 
         ##################################################
         # Blocks
         ##################################################
 
-        self._uhd_sample_rate_range = Range(32000, 56000000, 10000, 500000, 200)
-        self._uhd_sample_rate_win = RangeWidget(self._uhd_sample_rate_range, self.set_uhd_sample_rate, "'uhd_sample_rate'", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.top_layout.addWidget(self._uhd_sample_rate_win)
-        self._uhd_gain_range = Range(0, 90, 1, 1, 200)
-        self._uhd_gain_win = RangeWidget(self._uhd_gain_range, self.set_uhd_gain, "'uhd_gain'", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.top_layout.addWidget(self._uhd_gain_win)
-        self._uhd_center_freq_range = Range(70000000, 6000000000, 1000000, 80000000, 200)
-        self._uhd_center_freq_win = RangeWidget(self._uhd_center_freq_range, self.set_uhd_center_freq, "'uhd_center_freq'", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.top_layout.addWidget(self._uhd_center_freq_win)
-        self._uhd_bw_range = Range(1000, 56000000, 10000, 1000000, 200)
-        self._uhd_bw_win = RangeWidget(self._uhd_bw_range, self.set_uhd_bw, "'uhd_bw'", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.top_layout.addWidget(self._uhd_bw_win)
-        self._signal_src_samp_rate_range = Range(1000, 1000000, 1000, 1000000, 200)
-        self._signal_src_samp_rate_win = RangeWidget(self._signal_src_samp_rate_range, self.set_signal_src_samp_rate, "'signal_src_samp_rate'", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.top_layout.addWidget(self._signal_src_samp_rate_win)
-        self._signal_src_freq_range = Range(0, 500000, 1000, 10000, 200)
-        self._signal_src_freq_win = RangeWidget(self._signal_src_freq_range, self.set_signal_src_freq, "'signal_src_freq'", "counter_slider", float, QtCore.Qt.Horizontal)
-        self.top_layout.addWidget(self._signal_src_freq_win)
         self.uhd_usrp_source_0 = uhd.usrp_source(
             ",".join(("addr=192.168.10.2", "")),
             uhd.stream_args(
@@ -126,7 +106,7 @@ class rf_flowgraph_2(gr.top_block, Qt.QWidget):
         self.uhd_usrp_sink_0.set_antenna("TX/RX", 0)
         self.uhd_usrp_sink_0.set_bandwidth(uhd_bw, 0)
         self.uhd_usrp_sink_0.set_gain(uhd_gain, 0)
-        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_gr_complex*1, 'rf_flowgraph_2', False)
+        self.blocks_file_sink_0 = blocks.file_sink(gr.sizeof_gr_complex*1, 'rf_flowgraph_2.bin', False)
         self.blocks_file_sink_0.set_unbuffered(False)
         self.analog_sig_source_x_0 = analog.sig_source_c(signal_src_samp_rate, analog.GR_COS_WAVE, signal_src_freq, 1, 0, 0)
 
