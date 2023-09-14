@@ -213,6 +213,19 @@ blocks:
     coordinate: [864, 60.0]
     rotation: 0
     state: true
+- name: note_1
+  id: note
+  parameters:
+    alias: ''
+    comment: ''
+    note: There is a TCP Sink Block to potentially send stream over TCP.
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [632, 492.0]
+    rotation: 0
+    state: true
 - name: uhd_usrp_sink_0
   id: uhd_usrp_sink
   parameters:
