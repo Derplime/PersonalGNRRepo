@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/zsh
 
 # Case statement to execute the corresponding Python script
 case $1 in
