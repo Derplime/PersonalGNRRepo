@@ -22,7 +22,7 @@ options:
     run_options: prompt
     sizing_mode: fixed
     thread_safe_setters: ''
-    title: Loopback Test 1
+    title: Loopback Over TCP 1
     window_size: (1000,1000)
   states:
     bus_sink: false
@@ -85,7 +85,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '1'
+    value: '15'
   states:
     bus_sink: false
     bus_source: false
@@ -128,22 +128,22 @@ blocks:
     coordinate: [64, 292.0]
     rotation: 0
     state: true
-- name: blocks_file_sink_0
-  id: blocks_file_sink
+- name: network_tcp_sink_0
+  id: network_tcp_sink
   parameters:
+    addr: 127.0.0.1
     affinity: ''
     alias: ''
-    append: 'False'
     comment: ''
-    file: rf_flowgraph_1.bin
+    mode: '2'
+    port: '2000'
     type: complex
-    unbuffered: 'False'
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [448, 492.0]
+    coordinate: [480, 492.0]
     rotation: 0
     state: true
 - name: note_0
@@ -169,7 +169,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [632, 492.0]
+    coordinate: [864, 364.0]
     rotation: 0
     state: true
 - name: uhd_usrp_sink_0
@@ -283,7 +283,7 @@ blocks:
     clock_source6: ''
     clock_source7: ''
     comment: ''
-    dev_addr: '"addr=192.168.10.2"'
+    dev_addr: '"addr=192.168.1.6"'
     dev_args: '""'
     gain0: uhd_gain
     gain1: '0'
@@ -624,7 +624,7 @@ blocks:
     dc_offs_enb7: default
     dc_offs_enb8: default
     dc_offs_enb9: default
-    dev_addr: '"addr=192.168.10.2"'
+    dev_addr: '"addr=192.168.1.6"'
     dev_args: '""'
     gain0: uhd_gain
     gain1: '0'
@@ -888,7 +888,7 @@ blocks:
 
 connections:
 - [analog_sig_source_x_0, '0', uhd_usrp_sink_0, '0']
-- [uhd_usrp_source_0, '0', blocks_file_sink_0, '0']
+- [uhd_usrp_source_0, '0', network_tcp_sink_0, '0']
 
 metadata:
   file_format: 1
